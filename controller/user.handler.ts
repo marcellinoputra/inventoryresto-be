@@ -28,9 +28,6 @@ export async function signin(req: Request, res: Response) {
       username: req.body.username,
     },
   });
-  // console.log(token);
-  // console.log(findUser[0].password);
-  // console.log(req.body.password);
 
   try {
     let data = bcrypt.compareSync(req.body.password, findUser[0].password);

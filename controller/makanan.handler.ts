@@ -7,10 +7,6 @@ export async function getMakanan(req: Request, res: Response) {
     data: makanan,
     message: 'Berhasil Mendapatkan List Makanan',
   });
-  console.log(
-    makanan.every((makanan) => makanan instanceof makananModel)
-  );
-  console.log('All Product: ', JSON.stringify(makanan));
 }
 
 export async function postMakanan(req: Request, res: Response) {

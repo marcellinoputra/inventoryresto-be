@@ -7,8 +7,6 @@ export async function getRole(req: Request, res: Response) {
     data: role,
     message: 'Berhasil Mendapatkan List Role',
   });
-  console.log(role.every((role) => role instanceof roleModel));
-  console.log('Role : ', JSON.stringify(role));
 }
 
 

@@ -1,4 +1,3 @@
-// const { Sequelize } = require('sequelize');
 import { Sequelize } from "sequelize";
 
 const connectionDatabase = new Sequelize({
@@ -13,15 +12,5 @@ const connectionDatabase = new Sequelize({
 });
 
 export default connectionDatabase
-
-// export default async function connectionTesting() {
-//   try {
-//     await sequalize.authenticate();
-//     console.log('Database has been Connected');
-//   } catch (err) {
-//     console.log('Unable to connect to the database', err);
-//   }
-// }
-
 
 
