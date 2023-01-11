@@ -1,19 +1,20 @@
-const makananModel = require('../model/makanan.model');
+import { makananModel } from "../model/makanan.model";
+import { Request, Response} from "express";
 
-async function getMakanan(req, res) {
-  const makanan = await makananModel.Makanan.findAll();
+export async function getMakanan(req: Request, res: Response) {
+  const makanan = await makananModel.findAll();
   res.status(200).send({
     data: makanan,
     message: 'Berhasil Mendapatkan List Makanan',
   });
   console.log(
-    makanan.every((makanan) => makanan instanceof makananModel.Makanan)
+    makanan.every((makanan) => makanan instanceof makananModel)
   );
   console.log('All Product: ', JSON.stringify(makanan));
 }
 
-async function postMakanan(req, res, next) {
-  const addMakanan = await makananModel.Makanan.create({
+export async function postMakanan(req: Request, res: Response) {
+  const addMakanan = await makananModel.create({
     nama_makanan: req.body.nama_makanan,
     harga: req.body.harga,
   });
@@ -26,8 +27,3 @@ async function postMakanan(req, res, next) {
     message: 'Berhasil Menambahkan Makanan ke List Makanan',
   });
 }
-
-module.exports = {
-  getMakanan,
-  postMakanan,
-};

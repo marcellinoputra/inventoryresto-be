@@ -1,17 +1,18 @@
-const userModel = require('../model/user.model');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import { Request, Response } from "express";
+import userModel from "../model/user.model";
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
-async function signup(req, res) {
+export async function signup(req: Request, res: Response) {
   const saltRound = 10;
   const salt = bcrypt.genSaltSync(saltRound);
   const hash = bcrypt.hashSync(req.body.password, salt);
 
-  const createUser = await userModel.User.create({
+  const createUser = await userModel.create({
     nama: req.body.nama,
     username: req.body.username,
     password: hash,
-    avatar: req.file.originalname,
+    avatar: req.file?.originalname as string
   });
 
   res.status(201).send({
@@ -21,8 +22,8 @@ async function signup(req, res) {
   });
 }
 
-async function signin(req, res) {
-  const findUser = await userModel.User.findAll({
+export async function signin(req: Request, res: Response) {
+  const findUser = await userModel.findAll({
     where: {
       username: req.body.username,
     },
@@ -44,7 +45,7 @@ async function signin(req, res) {
           },
         },
         'secret',
-        { expiresIn: '1m' }
+        { expiresIn: '1h' }
       );
       return res.status(200).send({
         data: {
